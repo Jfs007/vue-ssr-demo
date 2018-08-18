@@ -5,6 +5,9 @@
 
 ##文件目录
 首先先了解一下项目结构吧
+
+```
+
 ├── README.md
 ├── build
 │   ├── setup-dev-server.js /**用于热更新的配置项**/
@@ -41,6 +44,7 @@
         ├── about.vue
         ├── home.vue
         └── subAbout.vue
+```        
 ##实现一个SSR
 VUESSR的实现，将一套代码分别打包给服务端、客户端使用，服务端的入口文件来自于entry-server.js
 客户端的入口文件来自于entry-client.js。
