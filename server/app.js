@@ -7,7 +7,6 @@ const Api = require('./routers');
 const resolve = fname => path.resolve(__dirname, fname);
 const app = express();
 const isProd = process.env.NODE_ENV === 'production'
-
 // 静态资源
 
 app.use(express.static(resolve('../dist')));
@@ -18,9 +17,7 @@ function createRenderer(bundle, options) {
   // https://github.com/vuejs/vue/blob/dev/packages/vue-server-renderer/README.md#why-use-bundlerenderer
   return createBundleRenderer(bundle, Object.assign(options, {
    
-    // this is only needed when vue-server-renderer is npm-linked
-    // basedir: resolve('./dist'),
-    // recommended for performance
+    // 
     runInNewContext: false
   }))
 }
@@ -31,7 +28,7 @@ const templateHtmlPath = resolve('../src/index.template.html');
 let renderer = null;
 let readyPromise = null;
 if (isProd) {
-  // 需要文件
+  //
   const template = fs.readFileSync(templateHtmlPath, 'utf-8')
   const bundle = require('../dist/vue-ssr-server-bundle.json')
   // The client manifests are optional, but it allows the renderer

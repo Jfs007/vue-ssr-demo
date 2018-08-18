@@ -1,7 +1,17 @@
-# SSR demo
-### 使用vue实现的服务端渲染的demo，对vue官方尤大写的一个例子的简化，取材于[HackerNews](https://cn.vuejs.org/v2/examples/hackernews.html)
-### 如果你想看vuesrr的文档可以点击下面这个链接 [官方文档](https://ssr.vuejs.org/zh/#%E4%BB%80%E4%B9%88%E6%98%AF%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E6%B8%B2%E6%9F%93-ssr-%EF%BC%9F)
-### 该demo只用于理解
+## SSR demo
+* 使用vue实现的服务端渲染的demo，对vue官方尤大写的一个例子的简化，取材于[HackerNews](https://cn.vuejs.org/v2/examples/hackernews.html)
+* 如果你想看vuesrr的文档可以点击下面这个链接 [官方文档](https://ssr.vuejs.org/zh/#%E4%BB%80%E4%B9%88%E6%98%AF%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E6%B8%B2%E6%9F%93-ssr-%EF%BC%9F)
+* 该demo只用于理解 
+ 
+## 为什么Vue可以SSR？
+* 虚拟 DOM 的存在 通俗地讲就是映射dom节点的 对象   
+* Vue2实现了虚拟 DOM，不在如Vue1一样直接处理html的dom构建响应式绑定
+* Vue2分离了dom 不依赖dom 不再耦合，所以Vue1是不能SSR的😄
+这就意味着在任何地方任何语言只要可以构造出虚拟 DOM结构的对象，那就能够渲染出html字符串，这期间是不依赖dom的
+* 这使得服务端去通过虚拟 DOM树渲染出html字符串成为可能，
+很显然nodejs有着近乎相似的语法能够直接执行js的对象，
+所以在服务器端语言使用nodejs是比较好的选择了
+(当然其他语言只要实现虚拟 DOM树转化也是可以的)
 
 ## 文件目录
 首先先了解一下项目结构吧
@@ -44,24 +54,21 @@
         ├── about.vue
         ├── home.vue
         └── subAbout.vue
-```        
+```      
+  
 ## 实现一个SSR
-VUESSR的实现，将一套代码分别打包给服务端、客户端使用，服务端的入口文件来自于entry-server.js
+* VUESSR的实现，将一套代码分别打包给服务端、客户端使用，服务端的入口文件来自于entry-server.js
 客户端的入口文件来自于entry-client.js。
-服务端运行服务端的代码将通过对vue组件的解析，数据注入从而渲染出html字符串(服务端目的只要html字符串，方便理解不用去管其他花里胡哨的东西，只要记住服务端最终只是要html字符串，具体细节可见下面的Vue的SSR的大致流程)；
-而客户端运行打包的客户端代码
-(方便理解客户端对服务端返回html字符串和通过自己组件上template或者render够坚定虚拟dom进行匹配比较再融合让页面从静态的html变成了由vue接管的可响应html，然后就正常做vue做的事情吧，具体细节可见下面的Vue的SSR的大致流程)；
+* 服务端运行服务端的代码将通过对vue组件的解析，数据注入从而渲染出html字符串(服务端目的只要html字符串，方便理解不用去管其他花里胡哨的东西，只要记住**服务端最终只是要html字符串**，具体细节可见下面的Vue的SSR的大致流程)；
+* 而客户端运行打包的客户端代码
+(方便理解客户端**对服务端返回html字符串和通过自己组件上template或者render构建虚拟dom进行匹配比较再融合让页面从静态的html变成了由vue接管的可响应html**，然后就正常做vue做的事情吧，具体细节可见下面的Vue的SSR的大致流程)；
 
-## 为什么Vue可以SSR？
-虚拟 DOM 的存在
-通俗地讲就是映射dom节点的 对象   
-Vue2实现了虚拟 DOM 不在如Vue1一样直接处理html的dom构建响应式绑定
-Vue2分离了dom 不依赖dom 不再耦合，所以Vue1是不能SSR的😄
-这就意味着在任何地方任何语言只要可以构造出虚拟 DOM结构的对象，那就能够渲染出html字符串，这期间是不依赖dom的
-这使得服务端去通过虚拟 DOM树渲染出html字符串成为可能，
-很显然nodejs有着近乎相似的语法能够直接执行js的对象，
-所以在服务器端语言使用nodejs是比较好的选择了
-(当然其他语言只要实现虚拟 DOM树转化也是可以的)
+## 快速开始
+```
+npm run dev 启动wepack服务器，用于本地测试
+npm run build 打包代码
+npm start 开发环境下启动项目 *在启动该命令前，需要先npm run build打包代码
+```
 
 ## Vue的SSR和传统SSR(以下把传统服务端渲染统称为传统SSR)的区别在哪？
 
@@ -110,7 +117,7 @@ Vue2分离了dom 不依赖dom 不再耦合，所以Vue1是不能SSR的😄
 
 
 ## 好用的VUE SSR脚手架
-[nuxt](https://nuxtjs.org/)
+### [nuxt](https://nuxtjs.org/)
 
 
 
