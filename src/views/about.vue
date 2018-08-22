@@ -6,13 +6,18 @@
 </template>
 <script>
 import { mapState } from 'vuex'
+import about from '@/store/about/index'
 export default {
   name: 'about',
   asyncData({store}) {
-    return store.dispatch('getAbout')
+    store.registerModule(about.moduleName, about)
+    return store.dispatch('about/getAbout')
   },
   computed: {
     ...mapState(['about'])
+  },
+  mounted() {
+    this.$store.dispatch('about/testApi')
   }
 }
 </script>

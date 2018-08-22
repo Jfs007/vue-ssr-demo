@@ -1,10 +1,13 @@
 // 客户端入口文件
 import createApp from './app';
 const { app, router, store } = createApp()
-
+// import about from '@/store/about/index'
 // 如果存在__INITIAL_STATE__状态，替换 store 的根状态
 if (window.__INITIAL_STATE__) {
-  store.replaceState(window.__INITIAL_STATE__)
+
+  // store.registerModule(about.moduleName, about)
+  store.replaceState(window.__INITIAL_STATE__);
+  window.__INITIAL_STATE__ = null;
 }
 // 初次路由加载完毕后
 router.onReady(() => {
